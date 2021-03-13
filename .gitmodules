@@ -1,0 +1,3 @@
+[submodule "brawlcrate"]
+	path = brawlcrate
+	url = https://github.com/libertyernie/brawlcrate
