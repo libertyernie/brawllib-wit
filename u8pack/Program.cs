@@ -8,7 +8,7 @@ namespace u8pack {
 (C) 2021 libertyernie
 https://github.com/libertyernie/brawllib-u8tools
 
-Built against BrawlLib.dll from BrawlCrate
+Built against BrawlLib.dll based on BrawlCrate
 https://github.com/soopercool101/BrawlCrate
 
 Usage: u8pack.exe [output.arc]";
@@ -38,30 +38,31 @@ Usage: u8pack.exe [output.arc]";
             }
         }
 
-        public static U8Node CreateArchive(string input_directory) {
+        public static U8Node Build(string input_directory) {
             var node = new U8Node();
             Pack(input_directory, node);
             return node;
         }
 
-        public static void CreateArchive(string input_directory, string output_file) {
-            using (var node = CreateArchive(input_directory)) {
+        public static void Build(string input_directory, string output_file) {
+            using (var node = Build(input_directory)) {
                 node.Export(output_file);
             }
         }
 
-        public static void Main(string[] args) {
+        public static int Main(string[] args) {
             if (args.Length != 1 || args[0] == "--help" || args[0] == "/?") {
                 Console.Error.WriteLine(USAGE);
-                return;
+                return 1;
             }
 
             if (File.Exists(args[0])) {
                 Console.Error.WriteLine($"File already exists: {args[0]}");
-                return;
+                return 1;
             }
 
-            CreateArchive(Environment.CurrentDirectory, args[0]);
+            Build(Environment.CurrentDirectory, args[0]);
+            return 0;
         }
     }
 }

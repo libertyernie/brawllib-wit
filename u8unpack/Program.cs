@@ -10,7 +10,7 @@ namespace u8unpack {
 (C) 2021 libertyernie
 https://github.com/libertyernie/brawllib-u8tools
 
-Built against BrawlLib.dll from BrawlCrate
+Built against BrawlLib.dll based on BrawlCrate
 https://github.com/soopercool101/BrawlCrate
 
 Usage: u8unpack.exe [input.arc]";
@@ -20,7 +20,7 @@ Usage: u8unpack.exe [input.arc]";
             .Concat(Path.GetInvalidPathChars())
             .Distinct();
 
-        public static void Export(string output_directory, ResourceNode node) {
+        public static void Extract(string output_directory, ResourceNode node) {
             var invalid_file_chars = InvalidCharacters.Intersect(node.Name).ToArray();
             if (invalid_file_chars.Any())
                 throw new Exception($"The node name {node.Name} contains invalid character(s): {new string(invalid_file_chars)}");
@@ -31,7 +31,7 @@ Usage: u8unpack.exe [input.arc]";
             if (node is U8FolderNode) {
                 foreach (var child in node.Children) {
                     Directory.CreateDirectory(output_path);
-                    Export(output_path, child);
+                    Extract(output_path, child);
                 }
             } else {
                 if (File.Exists(output_path))
@@ -42,8 +42,9 @@ Usage: u8unpack.exe [input.arc]";
         }
 
         public static void Unpack(string output_directory, ResourceNode node) {
+            Directory.CreateDirectory(output_directory);
             foreach (var c in node.Children) {
-                Export(output_directory, c);
+                Extract(output_directory, c);
             }
         }
 
@@ -53,18 +54,19 @@ Usage: u8unpack.exe [input.arc]";
             }
         }
 
-        public static void Main(string[] args) {
+        public static int Main(string[] args) {
             if (args.Length != 1 || args[0] == "--help" || args[0] == "/?") {
                 Console.Error.WriteLine(USAGE);
-                return;
+                return 1;
             }
 
             if (!File.Exists(args[0])) {
                 Console.Error.WriteLine($"File not found: {args[0]}");
-                return;
+                return 1;
             }
 
             Unpack(Environment.CurrentDirectory, args[0]);
+            return 0;
         }
     }
 }
