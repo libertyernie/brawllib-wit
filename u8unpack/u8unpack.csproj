@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\u8pack\u8pack.csproj" />
+    <ProjectReference Include="..\brawlcrate\BrawlLib\BrawlLib.csproj" />
   </ItemGroup>
 
 </Project>
