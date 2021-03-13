@@ -13,7 +13,7 @@ https://github.com/libertyernie/brawllib-u8tools
 Built against BrawlLib.dll from BrawlCrate
 https://github.com/soopercool101/BrawlCrate
 
-Usage: u8unpack.exe [file.arc]";
+Usage: u8unpack.exe [input.arc]";
 
         public static IEnumerable<char> InvalidCharacters =>
             Path.GetInvalidFileNameChars()
@@ -26,6 +26,7 @@ Usage: u8unpack.exe [file.arc]";
                 throw new Exception($"The node name {node.Name} contains invalid character(s): {new string(invalid_file_chars)}");
 
             string output_path = Path.Combine(output_directory, node.Name);
+            Console.WriteLine(output_path);
 
             if (node is U8FolderNode) {
                 foreach (var child in node.Children) {

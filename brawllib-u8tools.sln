@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrawlLib", "..\BrawlCrate\BrawlLib\BrawlLib.csproj", "{4ACCED74-DCD7-468C-966C-175B0DF0CD41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "u8pack", "u8pack\u8pack.csproj", "{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Canary|Any CPU = Canary|Any CPU
@@ -77,6 +79,30 @@ Global
 		{4ACCED74-DCD7-468C-966C-175B0DF0CD41}.Release|x64.Build.0 = Release|x64
 		{4ACCED74-DCD7-468C-966C-175B0DF0CD41}.Release|x86.ActiveCfg = Release|x86
 		{4ACCED74-DCD7-468C-966C-175B0DF0CD41}.Release|x86.Build.0 = Release|x86
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Canary|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Canary|Any CPU.Build.0 = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Canary|x64.ActiveCfg = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Canary|x64.Build.0 = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Canary|x86.ActiveCfg = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Canary|x86.Build.0 = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Debug|x64.Build.0 = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Debug|x86.Build.0 = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Mono|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Mono|Any CPU.Build.0 = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Mono|x64.ActiveCfg = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Mono|x64.Build.0 = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Mono|x86.ActiveCfg = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Mono|x86.Build.0 = Debug|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Release|x64.ActiveCfg = Release|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Release|x64.Build.0 = Release|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Release|x86.ActiveCfg = Release|Any CPU
+		{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
