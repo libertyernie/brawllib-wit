@@ -8,9 +8,9 @@ namespace u8unpack {
     public static class Program {
         public const string USAGE = @"u8unpack
 (C) 2021 libertyernie
-https://github.com/libertyernie/brawllib-u8tools
+https://github.com/libertyernie/brawllib-wit
 
-Built against BrawlLib.dll based on BrawlCrate
+Built against BrawlLib.dll from BrawlCrate 0.36b
 https://github.com/soopercool101/BrawlCrate
 
 Usage: u8unpack.exe [input.arc]";

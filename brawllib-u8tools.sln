@@ -12,11 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		COPYING.txt = COPYING.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "u8pack", "u8pack\u8pack.csproj", "{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "u8pack", "u8pack\u8pack.csproj", "{1CB458B4-2CD6-4ED5-965F-9AE2157B9EC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{CFF973BE-9AAC-4680-ACFB-668F680F716B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BrawlLib", "brawlcrate\BrawlLib\BrawlLib.csproj", "{86603545-4E07-4E10-AADE-239CF9CF4E03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{CFF973BE-9AAC-4680-ACFB-668F680F716B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,30 +104,6 @@ Global
 		{CFF973BE-9AAC-4680-ACFB-668F680F716B}.Release|x64.Build.0 = Release|Any CPU
 		{CFF973BE-9AAC-4680-ACFB-668F680F716B}.Release|x86.ActiveCfg = Release|Any CPU
 		{CFF973BE-9AAC-4680-ACFB-668F680F716B}.Release|x86.Build.0 = Release|Any CPU
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Canary|Any CPU.ActiveCfg = Canary|Any CPU
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Canary|Any CPU.Build.0 = Canary|Any CPU
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Canary|x64.ActiveCfg = Canary|x64
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Canary|x64.Build.0 = Canary|x64
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Canary|x86.ActiveCfg = Canary|x86
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Canary|x86.Build.0 = Canary|x86
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Debug|x64.ActiveCfg = Debug|x64
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Debug|x64.Build.0 = Debug|x64
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Debug|x86.ActiveCfg = Debug|x86
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Debug|x86.Build.0 = Debug|x86
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Mono|Any CPU.ActiveCfg = Mono|Any CPU
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Mono|Any CPU.Build.0 = Mono|Any CPU
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Mono|x64.ActiveCfg = Mono|x64
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Mono|x64.Build.0 = Mono|x64
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Mono|x86.ActiveCfg = Mono|x86
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Mono|x86.Build.0 = Mono|x86
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Release|Any CPU.Build.0 = Release|Any CPU
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Release|x64.ActiveCfg = Release|x64
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Release|x64.Build.0 = Release|x64
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Release|x86.ActiveCfg = Release|x86
-		{86603545-4E07-4E10-AADE-239CF9CF4E03}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
