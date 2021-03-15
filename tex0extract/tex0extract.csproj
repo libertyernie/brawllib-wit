@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\brawlcrate\BrawlLib\BrawlLib.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="BrawlLib">
       <HintPath>..\lib\BrawlLib.dll</HintPath>
     </Reference>

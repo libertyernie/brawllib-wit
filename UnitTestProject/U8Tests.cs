@@ -4,7 +4,7 @@ using System.IO;
 
 namespace UnitTestProject {
     [TestClass]
-    public class UnitTests {
+    public class U8Tests {
         [TestMethod]
         public void PackAndUnpack() {
             var tempDir1 = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());

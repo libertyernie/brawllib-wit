@@ -4,6 +4,8 @@
     <TargetFramework>net472</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <Platforms>x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +18,15 @@
   <ItemGroup>
     <ProjectReference Include="..\u8pack\u8pack.csproj" />
     <ProjectReference Include="..\u8unpack\u8unpack.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="BrawlLib">
+      <HintPath>..\lib\BrawlLib.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK">
+      <HintPath>..\lib\OpenTK.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
