@@ -13,7 +13,7 @@ https://github.com/libertyernie/brawllib-wit
 Built against BrawlLib.dll from BrawlCrate 0.36b
 https://github.com/soopercool101/BrawlCrate
 
-Usage: u8unpack.exe [input.arc]";
+Usage: u8unpack.exe input.arc";
 
         public static IEnumerable<char> InvalidCharacters =>
             Path.GetInvalidFileNameChars()

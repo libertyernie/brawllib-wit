@@ -11,7 +11,7 @@ https://github.com/libertyernie/brawllib-wit
 Built against BrawlLib.dll from BrawlCrate 0.36b
 https://github.com/soopercool101/BrawlCrate
 
-Usage: u8pack.exe [output.arc]";
+Usage: u8pack.exe output.arc";
 
         public static void Pack(string path, U8EntryNode parent) {
             foreach (var file in Directory.EnumerateFiles(path)) {
