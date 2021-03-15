@@ -1,6 +1,7 @@
 .vs
-bin
-obj
-publish
-PublishProfiles
+bin/
+obj/
+publish/
+PublishProfiles/
+launchSettings.json
 *.user
