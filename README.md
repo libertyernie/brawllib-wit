@@ -46,3 +46,12 @@ Usage: `u8pack.exe output.arc`
 Extracts all files and folders in a U8 archive to the current directory.
 
 Usage: `u8unpack.exe input.arc`
+
+## xmlyttext
+
+Reads and replaces text strings in [benzin](https://github.com/feartec/benzin)'s .xmlyt files.
+
+New text (for the replace commands) is read from stdin, and the output is written to stdout, not to the original file.
+`--replace-line` will read one line from stdin (and drop any trailing newlines), while `--replace-text` will read all text from stdin.
+
+Usage: `xmlyttext.exe [--read|--replace-line|--replace-text] input_file tag_name < new_text.txt > output_file`
