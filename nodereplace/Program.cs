@@ -13,7 +13,7 @@ https://github.com/libertyernie/brawllib-wit
 Built against BrawlLib.dll from BrawlCrate 0.36b
 https://github.com/soopercool101/BrawlCrate
 
-Usage: nodereplace.exe archive_file node_name replacement_file";
+Usage: nodereplace.exe archive_file node_name replacement_file.png";
 
         public static IEnumerable<ResourceNode> FindChildrenWithName(ResourceNode parent, string name) {
             if (parent.Name == name && parent is TEX0Node)
