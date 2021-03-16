@@ -12,10 +12,10 @@ https://github.com/libertyernie/brawllib-wit
 Built against BrawlLib.dll from BrawlCrate 0.36b
 https://github.com/soopercool101/BrawlCrate
 
-Usage: tex0extract.exe archive_file node_name output_file.png";
+Usage: nodeextract.exe archive_file node_name output_file.png";
 
         public static IEnumerable<ResourceNode> FindChildrenWithName(ResourceNode parent, string name) {
-            if (parent.Name == name && parent is TEX0Node)
+            if (parent.Name == name && (parent is TEX0Node || parent is TPLNode))
                 yield return parent;
             foreach (var c in parent.Children) {
                 var list = FindChildrenWithName(c, name);

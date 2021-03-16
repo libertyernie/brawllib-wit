@@ -2,12 +2,19 @@
 
 A collection of command-line interfaces to [BrawlLib](https://github.com/soopercool101/BrawlCrate) that can be helpful in Wii Virtual Console injection.
 
+## bannercfgfromtxt
+
+Reads the given banner.cfg.txt file and replaces each field with the contents of a text file in the current directory with the same name as the field.
+For example, the Japanese name will be replaced with the contents of JP.txt (if it exists, otherwise the existing title is kept).
+
+Usage: `bannercfgfromtxt.exe path/to/banner.cfg.txt`
+
 ## nodeextract
 
 Extracts a single TEX0 or TPL node from a file that BrawlLib can open, such as a U8 archive.
 The node must be the only TEX0 or TPL node with that name in the file.
 
-Usage: `tex0extract.exe archive_file node_name output_file.png`
+Usage: `nodeextract.exe archive_file node_name output_file.png`
 
 ## nodereplace
 

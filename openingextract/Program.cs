@@ -10,6 +10,9 @@ namespace openingextract {
 (C) 2021 libertyernie
 https://github.com/libertyernie/brawllib-wit
 
+Built against BrawlLib.dll from BrawlCrate 0.36b
+https://github.com/soopercool101/BrawlCrate
+
 Usage: openingextract.exe 000000000.app [banner|icon|sound] output.arc";
 
         public unsafe static int Main(string[] args) {
