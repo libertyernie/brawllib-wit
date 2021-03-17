@@ -1,18 +1,18 @@
 ﻿using BrawlLib.SSBB.ResourceNodes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Windows.Forms;
 
-namespace nodeextract {
+namespace texreplace {
     public class Program {
-        public const string USAGE = @"nodeextract
+        public const string USAGE = @"texreplace
 (C) 2021 libertyernie
 https://github.com/libertyernie/brawllib-wit
 
 Built against BrawlLib.dll from BrawlCrate 0.36b
 https://github.com/soopercool101/BrawlCrate
 
-Usage: nodeextract.exe archive_file node_name output_file.png";
+Usage: texreplace.exe file.[tpl|tex0] replacement_file.png";
 
         public static IEnumerable<ResourceNode> FindChildrenWithName(ResourceNode parent, string name) {
             if (parent.Name == name && (parent is TEX0Node || parent is TPLNode))
@@ -25,25 +25,19 @@ Usage: nodeextract.exe archive_file node_name output_file.png";
         }
 
         public static int Main(string[] args) {
-            if (args.Length != 3) {
+            Application.EnableVisualStyles();
+
+            if (args.Length != 2) {
                 Console.Error.WriteLine(USAGE);
                 return 1;
             }
 
             using (var node = NodeFactory.FromFile(null, args[0])) {
-                var children = FindChildrenWithName(node, args[1]).ToList();
-                switch (children.Count) {
-                    case 0:
-                        Console.Error.WriteLine($"No nodes found with name {args[1]}.");
-                        return 1;
-                    case 1:
-                        children.Single().Export(args[2]);
-                        return 0;
-                    default:
-                        Console.Error.WriteLine($"{children.Count} nodes found with name {args[1]}. Use BrawlCrate to replace the texture manually.");
-                        return 1;
-                }
+                node.Replace(args[1]);
+                node.Export(args[0]);
             }
+
+            return 0;
         }
     }
 }

@@ -9,20 +9,6 @@ For example, the Japanese name will be replaced with the contents of JP.txt (if 
 
 Usage: `bannercfgfromtxt.exe path/to/banner.cfg.txt`
 
-## nodeextract
-
-Extracts a single TEX0 or TPL node from a file that BrawlLib can open, such as a U8 archive.
-The node must be the only TEX0 or TPL node with that name in the file.
-
-Usage: `nodeextract.exe archive_file node_name output_file.png`
-
-## nodereplace
-
-Replaces a single TEX0 or TPL node from a file that BrawlLib can open, such as a U8 archive, with the contents of another file.
-The node must be the only TEX0 or TPL node with that name in the file.
-
-Usage: `nodereplace.exe archive_file node_name replacement_file.png`
-
 ## openingimet
 
 Finds the game's name (in the given language) in the opening.bnr or 000000000.app file, and prints it to the console.
@@ -35,6 +21,18 @@ Decompressed and extracts one of the three .arc files from the 00000000.app.
 
 Usage: `openingextract.exe 000000000.app [banner|icon|sound] output.arc`
 
+## texextract
+
+Extracts a single TEX0 or TPL texture to an image file.
+
+Usage: `texextract.exe input_file.tex0 output_file.png`
+
+## texreplace
+
+Replaces a single TEX0 or TPL texture with an image from another file.
+
+Usage: `texreplace.exe file_to_modify.tex0 replacement_file.png`
+
 ## u8pack
 
 Creates a U8 archive that includes all files in the current directory.
@@ -46,6 +44,12 @@ Usage: `u8pack.exe output.arc`
 Extracts all files and folders in a U8 archive to the current directory.
 
 Usage: `u8unpack.exe input.arc`
+
+## wteconvert
+
+Converts RGB5A3 data between .wte and .tex0 formats.
+
+Usage: `wteconvert.exe file.[wte|tex0] out.[wte|tex0]`
 
 ## xmlyttext
 
