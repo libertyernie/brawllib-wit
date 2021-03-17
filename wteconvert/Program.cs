@@ -3,10 +3,11 @@ using BrawlLib.SSBB.Types;
 using BrawlLib.Wii.Textures;
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace wteconvert {
-    public class Program {
+    public static class Program {
         public const string USAGE = @"wteconvert
 (C) 2021 libertyernie
 https://github.com/libertyernie/brawllib-wit
@@ -16,71 +17,99 @@ https://github.com/soopercool101/BrawlCrate
 
 Usage: wteconvert.exe file.[wte|tex0] out.[wte|tex0]";
 
-        public unsafe static byte[] ToByteArray(TEX0v1 header) {
-            byte[] array = new byte[sizeof(TEX0v1)];
-            fixed (byte* ptr = array) {
-                TEX0v1* destPtr = (TEX0v1*)ptr;
-                *destPtr = header;
+        public unsafe static TEX0v1 ReadTEX0(this Stream inputStream) {
+            byte[] buffer = new byte[sizeof(TEX0v1)];
+            inputStream.Read(buffer, 0, buffer.Length);
+            fixed (byte* ptr = buffer) {
+                return *(TEX0v1*)ptr;
             }
-            return array;
         }
 
-        public unsafe static TEX0v1 ToTEX0v1(byte[] headerData) {
-            fixed (byte* ptr = headerData) {
-                TEX0v1* srcPtr = (TEX0v1*)ptr;
-                return *srcPtr;
+        public unsafe static void WriteTEX0(this Stream outputStream, TEX0v1 header) {
+            TEX0v1* headerPtr = &header;
+            using (var inputStream = new UnmanagedMemoryStream((byte*)headerPtr, sizeof(TEX0v1))) {
+                inputStream.CopyTo(outputStream);
+            }
+        }
+
+        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        public unsafe struct WTE {
+            public BinTag tag;
+            public short width;
+            public short height;
+            private fixed int padding[6];
+
+            public WTE(short width, short height) {
+                this.tag = "WTE\0";
+                this.width = width;
+                this.height = height;
+            }
+        }
+
+        public unsafe static WTE ReadWTE(this Stream inputStream) {
+            byte[] buffer = new byte[sizeof(WTE)];
+            inputStream.Read(buffer, 0, buffer.Length);
+            fixed (byte* ptr = buffer) {
+                return *(WTE*)ptr;
+            }
+        }
+
+        public unsafe static void WriteWTE(this Stream outputStream, WTE header) {
+            WTE* headerPtr = &header;
+            using (var inputStream = new UnmanagedMemoryStream((byte*)headerPtr, sizeof(WTE))) {
+                inputStream.CopyTo(outputStream);
             }
         }
 
         public static byte[] WTEToTEX0(Stream inputStream) {
-            short width, height;
+            WTE oldHeader = inputStream.ReadWTE();
+            if (oldHeader.tag != "WTE\0")
+                throw new Exception("The input file does not appear to be a WTE file.");
 
-            using (var br = new BinaryReader(inputStream, Encoding.UTF8, leaveOpen: true)) {
-                int tag = br.ReadInt32();
-                if (tag != 0x00455457)
-                    throw new Exception("This file does not appear to be a valid .wte file.");
+            TEX0v1 newHeader = new TEX0v1(oldHeader.width, oldHeader.height, WiiPixelFormat.RGB5A3, 1);
 
-                width = br.ReadInt16();
-                height = br.ReadInt16();
-            }
-
-            inputStream.Seek(0x18, SeekOrigin.Current);
-
-            TEX0v1 header = new TEX0v1(width, height, WiiPixelFormat.RGB5A3, 1);
-            byte[] headerData = ToByteArray(header);
-
-            byte[] outputData = new byte[headerData.Length + width * height * 2];
-            using (var outputStream = new MemoryStream(outputData))
-            using (var headerInputStream = new MemoryStream(headerData, writable: false)) {
-                outputStream.Write(headerData, 0, headerData.Length);
+            using (var outputStream = new MemoryStream()) {
+                outputStream.WriteTEX0(newHeader);
                 inputStream.CopyTo(outputStream);
+                return outputStream.ToArray();
             }
-
-            return outputData;
         }
 
-        public unsafe static byte[] TEX0ToWTE(Stream inputStream) {
-            byte[] headerData = new byte[TEX0v1.Size];
-            inputStream.Read(headerData, 0, headerData.Length);
-            TEX0v1 header = ToTEX0v1(headerData);
+        public static byte[] TEX0ToWTE(Stream inputStream) {
+            TEX0v1 oldHeader = inputStream.ReadTEX0();
 
-            short width = header._width;
-            short height = header._height;
-            byte[] outputData = new byte[0x20 + width * height * 2];
-            using (var outputStream = new MemoryStream(outputData)) {
-                using (var bw = new BinaryWriter(outputStream, Encoding.UTF8, leaveOpen: true)) {
-                    bw.Write(0x00455457);
-                    bw.Write(width);
-                    bw.Write(height);
-                }
+            if (oldHeader._header._tag != "TEX0")
+                throw new Exception("The input file does not appear to be a TEX0 file.");
+            if (oldHeader.PixelFormat != WiiPixelFormat.RGB5A3)
+                throw new Exception("The format of the TEX0 file is not RGB5A3.");
 
-                for (int i = 0; i < 0x18; i++)
-                    outputStream.WriteByte(0);
+            WTE newHeader = new WTE(oldHeader._width, oldHeader._height);
 
+            using (var outputStream = new MemoryStream()) {
+                outputStream.WriteWTE(newHeader);
                 inputStream.CopyTo(outputStream);
+                return outputStream.ToArray();
             }
+        }
 
-            return outputData;
+        public unsafe static void ReplaceRaw(this ResourceNode node, byte[] data) {
+            fixed (byte* ptr = data) {
+                node.ReplaceRaw(ptr, data.Length);
+            }
+        }
+
+        public static void ImportFromWTE(this ResourceNode node, string path) {
+            using (var inputStream = new FileStream(path, FileMode.Open, FileAccess.Read)) {
+                byte[] data = WTEToTEX0(inputStream);
+                node.ReplaceRaw(data);
+            }
+        }
+
+        public unsafe static void ExportToWTE(this ResourceNode node, string path) {
+            using (var stream = new UnmanagedMemoryStream((byte*)node.WorkingUncompressed.Address, node.WorkingUncompressed.Length)) {
+                byte[] data = TEX0ToWTE(stream);
+                File.WriteAllBytes(path, data);
+            }
         }
 
         public unsafe static int Main(string[] args) {
@@ -94,33 +123,26 @@ Usage: wteconvert.exe file.[wte|tex0] out.[wte|tex0]";
                 return 1;
             }
 
-            using (TEX0Node node = new TEX0Node()) {
-                TEX0v1 header = new TEX0v1(0, 0, WiiPixelFormat.RGB5A3, 1);
-                byte[] headerData = ToByteArray(header);
-                fixed (byte* headerPtr = &headerData[0]) {
-                    node.ReplaceRaw(headerPtr, headerData.Length);
-                }
+            string tempFile1 = Path.GetTempFileName();
+            using (var fs = new FileStream(tempFile1, FileMode.Create, FileAccess.Write)) {
+                fs.WriteTEX0(new TEX0v1(0, 0, WiiPixelFormat.RGB5A3, 1));
+            }
 
+            using (var node = NodeFactory.FromFile(null, tempFile1)) {
                 if (Path.GetExtension(args[0]).ToLowerInvariant() == ".wte") {
-                    using (var fs = new FileStream(args[0], FileMode.Open, FileAccess.Read)) {
-                        byte[] data = WTEToTEX0(fs);
-                        fixed (byte* ptr = &data[0]) {
-                            node.ReplaceRaw(ptr, data.Length);
-                        }
-                    }
+                    node.ImportFromWTE(args[0]);
                 } else {
                     node.Replace(args[0]);
                 }
 
                 if (Path.GetExtension(args[1]).ToLowerInvariant() == ".wte") {
-                    using (var stream = new UnmanagedMemoryStream((byte*)node.WorkingUncompressed.Address, node.WorkingUncompressed.Length)) {
-                        byte[] data = TEX0ToWTE(stream);
-                        File.WriteAllBytes(args[1], data);
-                    }
+                    node.ExportToWTE(args[1]);
                 } else {
                     node.Export(args[1]);
                 }
             }
+
+            File.Delete(tempFile1);
 
             return 0;
         }

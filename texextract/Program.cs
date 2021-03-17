@@ -30,7 +30,7 @@ Usage: texextract.exe archive_file node_name output_file.png";
             }
 
             using (var node = NodeFactory.FromFile(null, args[0])) {
-                node.Export(args[0]);
+                node.Export(args[1]);
             }
 
             return 0;
