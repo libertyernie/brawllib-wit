@@ -1,6 +1,7 @@
 ﻿using BrawlLib.SSBB.ResourceNodes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace texreplace {
@@ -14,14 +15,11 @@ https://github.com/soopercool101/BrawlCrate
 
 Usage: texreplace.exe file.[tpl|tex0] replacement_file.png";
 
-        public static IEnumerable<ResourceNode> FindChildrenWithName(ResourceNode parent, string name) {
-            if (parent.Name == name && (parent is TEX0Node || parent is TPLNode))
+        public static IEnumerable<ResourceNode> ListTextures(ResourceNode parent) {
+            if (parent is TPLTextureNode || parent is TEX0Node)
                 yield return parent;
-            foreach (var c in parent.Children) {
-                var list = FindChildrenWithName(c, name);
-                foreach (var n in list)
-                    yield return n;
-            }
+            foreach (var child in parent.Children.SelectMany(ListTextures))
+                yield return child;
         }
 
         public static int Main(string[] args) {
@@ -33,8 +31,9 @@ Usage: texreplace.exe file.[tpl|tex0] replacement_file.png";
             }
 
             using (var node = NodeFactory.FromFile(null, args[0])) {
-                node.Replace(args[1]);
-                node.Export(args[0]);
+                var texture = ListTextures(node).Single();
+                texture.Replace(args[1]);
+                texture.Export(args[0]);
             }
 
             return 0;
