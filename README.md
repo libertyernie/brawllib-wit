@@ -9,6 +9,12 @@ For example, the Japanese name will be replaced with the contents of JP.txt (if 
 
 Usage: `bannercfgfromtxt.exe path/to/banner.cfg.txt`
 
+## imgoverlay
+
+Overlays one image onto another at a certain position and writes the output to a third file.
+
+Usage: `imgoverlay.exe larger.png smaller.png x y width height output.png`
+
 ## openingimet
 
 Finds the game's name (in the given language) in the opening.bnr or 000000000.app file, and prints it to the console.
