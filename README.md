@@ -26,7 +26,7 @@ Languages can be referred to by number (0, 1, 2..) or ISO 639-1 code (ja, en, de
 
 Usage: `openingimet.exe 000000000.app [ja|en|de|fr|es|it|nl|7|8|ko]`
 
-## openingimet
+## openingextract
 
 Decompresses and extracts one of the three .arc files from the 00000000.app.
 
